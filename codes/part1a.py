@@ -1,22 +1,23 @@
 from libraries import *
 
 # Required Paths
-# Use the current directory where the script is located
+# Use the current directory where the script is located (e.g., /content/Earth_Imaging/codes)
 base_path = os.getcwd() 
-root      = os.path.join(base_path, 'results_folder')
+
+# This logic goes UP one level to 'Earth_Imaging' and creates 'results_folder' there
+root = os.path.abspath(os.path.join(base_path, '..', 'results_folder'))
 
 landsat_dir = os.path.join(root, 'landsat')
 lulc_dir    = os.path.join(root, 'esri_lulc')
 out_dir     = os.path.join(root, 'outputs')
 
-# This ensures every folder in the chain is created
+# This ensures every folder in the chain is created outside of the 'codes' folder
 for d in [root, landsat_dir, lulc_dir, out_dir]:
     if not os.path.exists(d):
         os.makedirs(d, exist_ok=True)
         print(f"Created directory: {os.path.abspath(d)}")
 
 # Area of Interest — Nara Valley, Japan
-# Coordinates are in (longitude, latitude) format
 AOI = {
     'min_lon': 135.800, 'min_lat': 34.635,
     'max_lon': 135.881, 'max_lat': 34.696,
@@ -38,8 +39,6 @@ print(f'AOI  : {AOI["label"]}')
 print(f'Bbox : ({AOI["min_lon"]}, {AOI["min_lat"]}) → ({AOI["max_lon"]}, {AOI["max_lat"]})')
 
 # Authentication
-
-# Sending request using username and token and this gives us a temporary session key to access data
 auth_resp = requests.post(
     url + 'login-token',
     json={'username': usgs_user, 'token': usgs_token}
@@ -60,11 +59,11 @@ scene_query = {
             "max": 20,
             "min": 0
           },
-        'spatialFilter': { #spatial region using bounding box (MBR = minimum bounding rectangle)
-        'filterType': 'mbr',
-        'lowerLeft' : {'latitude': AOI['min_lat'], 'longitude': AOI['min_lon']},
-        'upperRight': {'latitude': AOI['max_lat'], 'longitude': AOI['max_lon']}
-    }
+        'spatialFilter': {
+            'filterType': 'mbr',
+            'lowerLeft' : {'latitude': AOI['min_lat'], 'longitude': AOI['min_lon']},
+            'upperRight': {'latitude': AOI['max_lat'], 'longitude': AOI['max_lon']}
+        }
     },
     'temporalFilter': {'startDate': start_date, 'endDate': end_date},
     'maxResults': 20,
@@ -74,7 +73,6 @@ scene_query = {
 raw_scenes = requests.post(url + 'scene-search', json=scene_query, headers=hdr).json()
 all_scenes = raw_scenes['data']['results']
 
-# Filtering by cloud cover as we keep only the areas where cloudcover < cloudlimit
 valid_scenes = [s for s in all_scenes if s.get('cloudCover', 100) < cloudlimit]
 valid_scenes.sort(key=lambda s: s['cloudCover'])
 
@@ -86,7 +84,7 @@ print('─' * 70)
 for idx, sc in enumerate(valid_scenes):
     print(f"{idx:<4} {sc['entityId']:<42} {sc.get('cloudCover',0):.1f}%")
 
-# Best scene the one with lowest cloud cover
+# Select best scene
 chosen        = valid_scenes[0]
 scene_id      = chosen['entityId']
 scene_date    = chosen.get('acquisitionDate', 'unknown')
@@ -104,7 +102,6 @@ opts_resp = requests.post(
 
 available_opts = opts_resp['data']
 
-# Prefer the full Bundle
 chosen_opt = next(
     (o for o in available_opts if 'Bundle' in o.get('productName','') and o.get('available')),
     next((o for o in available_opts if o.get('available')), None)
