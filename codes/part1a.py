@@ -1,12 +1,19 @@
 from libraries import *
 
 # Required Paths
-root        = '../data'
+# Use the current directory where the script is located
+base_path = os.getcwd() 
+root      = os.path.join(base_path, 'results_folder')
+
 landsat_dir = os.path.join(root, 'landsat')
 lulc_dir    = os.path.join(root, 'esri_lulc')
 out_dir     = os.path.join(root, 'outputs')
-for d in [landsat_dir, lulc_dir, out_dir]:
-    os.makedirs(d, exist_ok=True)
+
+# This ensures every folder in the chain is created
+for d in [root, landsat_dir, lulc_dir, out_dir]:
+    if not os.path.exists(d):
+        os.makedirs(d, exist_ok=True)
+        print(f"Created directory: {os.path.abspath(d)}")
 
 # Area of Interest — Nara Valley, Japan
 # Coordinates are in (longitude, latitude) format
