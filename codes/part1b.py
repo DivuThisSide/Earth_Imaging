@@ -1,12 +1,3 @@
-# from libraries import requests,os,tarfile,json,np,rasterio
-# from shapely.geometry import box, mapping, shape
-# from rasterio.mask import mask as rio_mask
-# from rasterio.warp import transform_geom
-# import matplotlib.pyplot as plt
-# import matplotlib.patches as mpatches
-# from part1a import url,hdr,scene_cloud,scene_id,chosen_opt,landsat_dir,scene_date,\
-#                    AOI,out_dir
-
 from part1a import *
 
 # Request download URL
