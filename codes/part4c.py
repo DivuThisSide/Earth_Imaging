@@ -85,7 +85,7 @@ fig.legend(handles=legend_patches, loc='lower center',
            ncol=len(legend_patches), fontsize=9,
            title='ESRI LULC Classes', bbox_to_anchor=(0.5, -0.02))
 
-plt.suptitle('Ground Truth vs CNN Prediction — Dresden AOI', fontsize=13, fontweight='bold')
+plt.suptitle(f'Ground Truth vs CNN Prediction — {AOI["label"]}', fontsize=13, fontweight='bold')
 plt.tight_layout()
 plt.savefig(os.path.join(out_dir, 'cnn_prediction_map.png'), dpi=150, bbox_inches='tight')
 plt.show()
