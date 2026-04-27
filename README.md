@@ -90,41 +90,9 @@ Earth_Imaging/
 
 ## Pipeline Architecture
 
-```
- ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
- │  part1a.py   │────▶│  part1b.py   │────▶│  part2.py    │
- │  Auth + Search│     │  Download +  │     │  ESRI LULC   │
- │              │     │  True Colour │     │  Ingestion   │
- └──────────────┘     └──────────────┘     └──────┬───────┘
-                                                   │
-                                                   ▼
-                      ┌──────────────┐     ┌──────────────┐
-                      │  part4a.py   │◀────│  part3.py    │
-                      │  Features +  │     │  NDVI Calc   │
-                      │  Patches     │     │  + Histogram │
-                      └──────┬───────┘     └──────────────┘
-                             │
-                             ▼
-                      ┌──────────────┐     ┌──────────────┐
-                      │  part4b.py   │────▶│  part4c.py   │
-                      │  CNN Train + │     │  Full-AOI    │
-                      │  HP Search   │     │  Prediction  │
-                      └──────────────┘     └──────┬───────┘
-                                                   │
-                                                   ▼
-                      ┌──────────────┐     ┌──────────────┐
-                      │  part5.py    │────▶│  part6a.py   │
-                      │  Evaluation  │     │  Multi-Scene │
-                      │  Metrics     │     │  Search      │
-                      └──────────────┘     └──────┬───────┘
-                                                   │
-                                                   ▼
-                      ┌──────────────┐     ┌──────────────┐
-                      │  part6b.py   │────▶│  part6c.py   │
-                      │  Seasonal    │     │  Time Series │
-                      │  NDVI Calc   │     │  + Change Map│
-                      └──────────────┘     └──────────────┘
-```
+![Architecture Diagram](architecture.png)
+
+---
 
 Each script imports its predecessor (`from part<N> import *`), creating a sequential execution chain. Running any script will automatically execute all upstream modules.
 
