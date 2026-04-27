@@ -13,12 +13,13 @@ parameters = {"bbox": f"{min_lon},{min_lat},{max_lon},{max_lat}","bboxSR": 4326,
 
 response = requests.get(esri_url, params=parameters)
 
+
 lulc_tif_path = os.path.join(lulc_dir, "lulc.tif")
 
 with open(lulc_tif_path, "wb") as f:
     f.write(response.content)
 
-# Update the opening line as well
+
 lulc_data = rioxarray.open_rasterio(lulc_tif_path, masked=True).squeeze()
 
 print("Data Ingestion Complete")
@@ -35,10 +36,8 @@ ESRI_CLASSES = {
     11: ('Rangeland',          '#E3E2C3'),
 }
 
-# Loading & inspecting LULC raster
-lulc_tif = "lulc.tif"
 
-with rasterio.open(lulc_tif) as src_lulc:
+with rasterio.open(lulc_tif_path) as src_lulc:
     lulc_arr = src_lulc.read(1).astype(np.int16)
     lulc_meta = src_lulc.meta.copy()
     lulc_transform = src_lulc.transform
