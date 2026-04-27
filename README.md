@@ -1,4 +1,4 @@
-# Earth Imaging — Satellite-Based Land Use / Land Cover Classification & NDVI Analysis
+# Earth Imaging: Satellite-Based Land Use / Land Cover Classification & NDVI Analysis
 
 > **Course:** DAT-103 · Semester 4  
 > **Region of Interest:** Nara Valley, Japan (135.800 °E – 135.881 °E, 34.635 °N – 34.696 °N · ~50 km²)
