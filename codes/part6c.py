@@ -65,10 +65,15 @@ else:
     ax.legend(fontsize=8, loc='upper left', ncol=2, framealpha=0.85)
 
     plt.tight_layout()
+    
     ts_save = os.path.join(out_dir, 'ndvi_time_series.png')
     plt.savefig(ts_save, dpi=150, bbox_inches='tight')
+    
     plt.show()
-    print(f'Saved → {ts_save}')
+    
+    plt.close('all') 
+    
+    print(f'Successfully Saved → {os.path.abspath(ts_save)}')    
 
 season_labels = [sm['season'] for sm in seasonal_scenes]
 n_classes     = len(le.classes_)
@@ -99,10 +104,15 @@ ax.grid(axis='y', alpha=0.3)
 ax.legend(fontsize=8, ncol=3, loc='upper right', framealpha=0.85)
 
 plt.tight_layout()
+
 bar_save = os.path.join(out_dir, 'ndvi_seasonal_bar.png')
 plt.savefig(bar_save, dpi=150, bbox_inches='tight')
+
 plt.show()
-print(f'Saved → {bar_save}')
+
+plt.close('all') 
+
+print(f'Successfully Saved → {os.path.abspath(bar_save)}')
 
 if len(seasonal_scenes) >= 2:
     ndvi_first = seasonal_scenes[0]['ndvi']
@@ -127,10 +137,15 @@ if len(seasonal_scenes) >= 2:
         fontsize=13, fontweight='bold'
     )
     plt.tight_layout()
+
     change_save = os.path.join(out_dir, 'ndvi_change_map.png')
     plt.savefig(change_save, dpi=150, bbox_inches='tight')
+    
     plt.show()
-    print(f'Saved → {change_save}')
+    
+    plt.close('all') 
+    
+    print(f'Successfully Saved → {os.path.abspath(change_save)}')  
 
 
 print('FINAL SUMMARY')
@@ -156,3 +171,16 @@ for cls in le.classes_:
           f'{scene_dates[trough_i]:<16}  '
           f'{swing:.3f}')
 print(f'\nAll outputs saved in: {out_dir}')
+
+
+print('\n' + '='*30)
+print('FILE SYSTEM VERIFICATION')
+print('='*30)
+expected_files = ['ndvi_map.png', 'ndvi_time_series.png', 'ndvi_seasonal_bar.png', 'ndvi_change_map.png']
+
+for file_name in expected_files:
+    full_path = os.path.join(out_dir, file_name)
+    if os.path.exists(full_path):
+        print(f" FOUND: {file_name}")
+    else:
+        print(f" MISSING: {file_name} (Looked in: {out_dir})")
