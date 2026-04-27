@@ -1,0 +1,13 @@
+requests
+numpy
+matplotlib
+rasterio
+shapely
+geopandas
+rioxarray
+scikit-learn
+torch
+torchvision
+Pillow
+scipy
+tqdm
