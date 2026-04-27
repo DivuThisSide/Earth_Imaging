@@ -1,4 +1,4 @@
-# 🌍 Earth Imaging — Satellite-Based Land Use / Land Cover Classification & NDVI Analysis
+# Earth Imaging — Satellite-Based Land Use / Land Cover Classification & NDVI Analysis
 
 > **Course:** DAT-103 · Semester 4  
 > **Region of Interest:** Nara Valley, Japan (135.800 °E – 135.881 °E, 34.635 °N – 34.696 °N · ~50 km²)
@@ -47,17 +47,17 @@ This project demonstrates a complete workflow for satellite image analysis, cove
 
 ## Key Features
 
-- 🔑 **Automated USGS M2M authentication** — token-based login with session key management  
-- 🛰️ **Smart scene selection** — spatial + temporal + cloud-cover filtering with WRS-2 tile locking  
-- 🎨 **True-colour & false-colour composites** — percentile-stretched RGB visualisation  
-- 🗺️ **ESRI 10 m LULC integration** — 9-class ground truth (Water, Trees, Crops, Built Area, etc.)  
-- 📊 **NDVI mapping & histograms** — per-pixel vegetation health with annotated colour bars  
-- 🧠 **CNN-based LULC classification** — 5-input-channel architecture with hyperparameter grid search  
-- 📈 **Comprehensive evaluation** — confusion matrices, F1 bar charts, ROC curves, IoU scores  
-- 🔄 **Test-Time Augmentation (TTA)** — 4-orientation averaging for more robust predictions  
-- 🏔️ **Spatial majority filter** — convolution-based neighbourhood voting to reduce salt-and-pepper noise  
-- 🌿 **Seasonal NDVI time series** — per-class phenology curves with ±1 σ shading  
-- 🗓️ **NDVI change-detection maps** — first-scene vs. last-scene difference imagery  
+-  **Automated USGS M2M authentication** - token-based login with session key management  
+-  **Smart scene selection** - spatial + temporal + cloud-cover filtering with WRS-2 tile locking  
+-  **True-colour & false-colour composites** - percentile-stretched RGB visualisation  
+-  **ESRI 10 m LULC integration** - 9-class ground truth (Water, Trees, Crops, Built Area, etc.)  
+-  **NDVI mapping & histograms** - per-pixel vegetation health with annotated colour bars  
+-  **CNN-based LULC classification** - 5-input-channel architecture with hyperparameter grid search  
+-  **Comprehensive evaluation** - confusion matrices, F1 bar charts, ROC curves, IoU scores  
+-  **Test-Time Augmentation (TTA)** - 4-orientation averaging for more robust predictions  
+-  **Spatial majority filter** - convolution-based neighbourhood voting to reduce salt-and-pepper noise  
+-  **Seasonal NDVI time series** - per-class phenology curves with ±1 σ shading  
+-  **NDVI change-detection maps** - first-scene vs. last-scene difference imagery  
 
 ---
 
