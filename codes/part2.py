@@ -13,10 +13,13 @@ parameters = {"bbox": f"{min_lon},{min_lat},{max_lon},{max_lat}","bboxSR": 4326,
 
 response = requests.get(esri_url, params=parameters)
 
-with open("lulc.tif", "wb") as f:
+lulc_tif_path = os.path.join(lulc_dir, "lulc.tif")
+
+with open(lulc_tif_path, "wb") as f:
     f.write(response.content)
 
-lulc_data = rioxarray.open_rasterio("lulc.tif", masked=True).squeeze()
+# Update the opening line as well
+lulc_data = rioxarray.open_rasterio(lulc_tif_path, masked=True).squeeze()
 
 print("Data Ingestion Complete")
 
