@@ -1,0 +1,7 @@
+
+**/__pycache__/
+**/landsat/
+**/esri_lulc/
+*.tar
+*.TIF
+*.tif
