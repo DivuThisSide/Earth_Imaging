@@ -23,7 +23,6 @@ An end-to-end remote sensing pipeline that acquires **Landsat 8/9 Collection-2 L
 12. [Output Artifacts](#output-artifacts)  
 13. [Configuration & Customisation](#configuration--customisation)  
 14. [Limitations & Future Work](#limitations--future-work)  
-15. [License](#license)
 
 ---
 
@@ -461,9 +460,3 @@ Replace `usgs_user` and `usgs_token` in `part1a.py` with your own USGS EarthExpl
 - **Spectral bands only** — incorporating additional features such as surface temperature (Band 10), SWIR indices, or texture features could improve classification accuracy.
 - **Larger architectures** — experimenting with deeper models (ResNet, U-Net) or transformer-based architectures could yield better results, especially for spatially complex landscapes.
 - **Cloud masking** — the current pipeline filters scenes by overall cloud cover but does not apply per-pixel cloud masks (QA_PIXEL band).
-
----
-
-## License
-
-This project was developed as part of the **DAT-103** coursework. Please refer to your institution's academic policies regarding code sharing and reuse.
